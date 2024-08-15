@@ -3,12 +3,24 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { LuSearch } from "react-icons/lu";
+import { useDispatch } from 'react-redux';
+import { toggleMenu } from '../utils/appSlice';
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+
+    const toggleMenuHandler = () => {
+        dispatch(toggleMenu());
+    }
+
     return (
-        <div className='grid grid-cols-5 p-4 shadow-lg'>
+        <div className='grid grid-flow-col p-4 shadow-lg'>
             <div className='flex items-center col-span-1'>
-                <RxHamburgerMenu className='text-2xl' />
+                <RxHamburgerMenu
+                    className='ml-2 text-2xl shrink-0 cursor-pointer'
+                    onClick={() => toggleMenuHandler()}
+                />
                 <img className='ml-2 w-20' src="/images/youtube_logo.png" alt='youtube-logo' />
             </div>
 
@@ -20,13 +32,13 @@ const Header = () => {
                 />
 
                 <button className='py-1 px-5 border-l-0 border-[1px] border-gray-300 bg-gray-100 rounded-r-full'>
-                    <LuSearch className='text-xl inline-block '/>
+                    <LuSearch className='text-xl inline-block ' />
                 </button>
             </div>
 
             <div className='flex items-center justify-end col-span-1'>
-                <IoMdNotificationsOutline className='text-xl mx-2'/>
-                <FaUserCircle className='text-xl mx-2'/>
+                <IoMdNotificationsOutline className='text-xl mx-2' />
+                <FaUserCircle className='text-xl mx-2' />
             </div>
         </div>
     )
