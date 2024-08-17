@@ -7,14 +7,14 @@ const VideoCard = ({info}) => {
     const {channelTitle, title, thumbnails} = snippet;
 
   return (
-    <div className='flex-grow basis-[300px] max-w-[400px] h-[320px] p-2 mb-2 cursor-pointer'>
+    <div>
         <img className='w-full mb-2 h-[65%] object-cover rounded-xl transition-all hover:rounded-none hover:scale-105' alt='thumbnail' src={thumbnails.medium.url} />
 
         <div className='h-[35%]'>
           <ul>
-            <li className='line-clamp-2 font-semibold text-gray-800'>{title}</li>
-            <li className='font-medium text-gray-700'>{channelTitle}</li>
-            <li className='font-medium text-gray-700'>{statistics.viewCount} Views</li>
+            <li className='line-clamp-2 font-semibold text-[#0f0f0f]'>{title}</li>
+            <li className='text-sm font-medium text-[#606060]'>{channelTitle}</li>
+            <li className='text-sm font-medium text-[#606060]'>{statistics.viewCount} Views</li>
           </ul>
 
         </div>
