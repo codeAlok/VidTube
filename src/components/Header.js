@@ -3,21 +3,33 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { LuSearch } from "react-icons/lu";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
+import { cacheResults } from '../utils/searchSlice';
 
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(true);
 
+    const searchCache = useSelector((store) => store.search);
     const dispatch = useDispatch();
 
     useEffect(() => {
         // (Debouncing concept is used)
         // make api call after every key press
         // but if the diffrence b/w 2 API's calls is < 200ms, decline the api call
-        const timer = setTimeout(() => getSearchSuggestions(), 200);
+        const timer = setTimeout(() => {
+            console.log("searchQery: ", searchQuery)
+
+            // ** Cache searchQuery data for optimization**
+            if(searchCache[searchQuery]) {
+                setSuggestions(searchCache[searchQuery]);
+            } else {
+                getSearchSuggestions()
+            }
+
+        } , 200);
 
         // remove timer if other key-pressed && re-render && unmount component
         return () => {
@@ -32,6 +44,11 @@ const Header = () => {
         const json = await data.json();
 
         setSuggestions(json[1]);
+
+        // Update suggestions cache if not already present
+        dispatch(cacheResults({
+            [searchQuery]: json[1],
+        }))
     }
 
     const toggleMenuHandler = () => {
