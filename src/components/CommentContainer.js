@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 // comment component
 const Comment = ({ data }) => {
-    const { name, text, replies } = data;
+    const { name, text} = data;
 
     return (
         <div className='flex w-full shadow-sm bg-gray-100 p-2 m-2'>
@@ -19,14 +19,14 @@ const Comment = ({ data }) => {
 }
 
 
-// comments list component
+// comments list component (for n-level comments)
 const CommentList = ({ comments }) => {
 
     return comments.map((comment, index) => (
         <div>
             <Comment key={index} data={comment} />
             <div className='pl-3 ml-3 border-l border-l-black'>
-                
+                {/* recursive method */}
                 <CommentList comments={comment.replies} />
             </div>
         </div>
