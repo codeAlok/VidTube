@@ -23,8 +23,8 @@ const Comment = ({ data }) => {
 const CommentList = ({ comments }) => {
 
     return comments.map((comment, index) => (
-        <div>
-            <Comment key={index} data={comment} />
+        <div key={index}>
+            <Comment data={comment} />
             <div className='pl-3 ml-3 border-l border-l-black'>
                 {/* recursive method */}
                 <CommentList comments={comment.replies} />
@@ -36,7 +36,7 @@ const CommentList = ({ comments }) => {
 
 const CommentContainer = () => {
     return (
-        <div className='m-5 p-2 w-[50vw]'>
+        <div className='p-4 w-[50vw]'>
             <h1 className='text-2xl font-bold'>comments: </h1>
 
             <CommentList comments={COMMENTS_API} />
