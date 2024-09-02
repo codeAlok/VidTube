@@ -3,11 +3,13 @@ import { FaUserCircle } from "react-icons/fa";
 
 const ChatMessage = ({name, message}) => {
   return (
-    <div className='flex items-center shadow-sm p-2'>
-        <FaUserCircle className='text-xl' />
+    <div className='flex items-start shadow-sm p-2 hover:bg-red-50'>
+        <FaUserCircle className='text-xl w-[10%]' />
         
-        <span className='font-bold px-2'>{name}</span>
-        <span>{message}</span>
+        <div className='w-[80%]'>
+          <span className='font-semibold pr-2'>{name}</span>
+          <span>{message}</span>
+        </div>
     </div>
   )
 }
